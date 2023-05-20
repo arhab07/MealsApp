@@ -1,6 +1,12 @@
 import React from "react";
 import { StyleSheet } from "react-native";
+import styled from "styled-components";
 import { Text , Card} from "react-native-paper";
+
+const Title = styled.Text`
+ color:red;
+`
+
 
 export const RestaurantInfoCard= ({restaurant ={}}) => {
     const {
@@ -23,7 +29,7 @@ export const RestaurantInfoCard= ({restaurant ={}}) => {
     {/* <Card.Title title={name}/> */}
     {/* <Text>{name}</Text> */}
     <Card.Content>
-      <Text variant="titleLarge">{name}</Text>
+      <Title>{name}</Title>
     </Card.Content>
    
   </Card>
