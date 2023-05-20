@@ -1,13 +1,32 @@
 import React from "react";
-import { StyleSheet } from "react-native";
-import styled from "styled-components";
-import { Text , Card} from "react-native-paper";
+import { StyleSheet, View  } from "react-native";
+import styled from "styled-components/native";
+import { Text, Card} from "react-native-paper";
 
-const Title = styled.Text`
- color:red;
+const Title = styled(Text)`
+  font-size: ${ props  => props.theme.fontSizes.title};
+  
+  font-family: ${({ theme }) => theme.fonts.body};
+  color: ${({ theme }) => theme.colors.ui.primary};
+`;
+
+
+const RestaurantCard = styled(Card)`
+background-color:${props => props.theme.colors.ui.quaternary};
+
 `
 
-
+const RestaurantCover =styled(Card.Cover)`
+  
+  backgroundColor:${props => props.theme.colors.ui.quaternary};
+`
+const Info = styled(View)`
+    padding:${props => props.theme.space[3]};
+`
+const Address = styled(Text)`
+font-size: ${props => props.theme.fontSizes.caption};
+font-family: ${({theme}) => theme.fonts.body};
+`
 export const RestaurantInfoCard= ({restaurant ={}}) => {
     const {
         name = "Spades Restaurant",
@@ -21,31 +40,16 @@ export const RestaurantInfoCard= ({restaurant ={}}) => {
         isClosedTemporarily=false
 
     } = restaurant
-
-    return (
-        <>
-    <Card elevation={5} style={styles.card}>
-    <Card.Cover key={name} source={{ uri:  photo[0] }} style={styles.cover} />
-    {/* <Card.Title title={name}/> */}
-    {/* <Text>{name}</Text> */}
-    <Card.Content>
-      <Title>{name}</Title>
-    </Card.Content>
-   
-  </Card>
-   
-   
-   
-        </>
-    )
+return (
+    <>
+         <RestaurantCard elevation={5}>
+            <RestaurantCover key={name} source={{ uri:  photo[0] }}/>
+            <Info>
+                <Title>{name}</Title>
+                <Address>{address}</Address>
+            </Info>
+        </RestaurantCard>
+    </>
+        )
 }
 
-const styles = StyleSheet.create({
-    card: {
-backgroundColor:"#fff",
-    },
-    cover:{
-        padding:16,
-        backgroundColor:"#fff"
-    }
-})
